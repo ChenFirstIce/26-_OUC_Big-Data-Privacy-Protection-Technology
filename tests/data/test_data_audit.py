@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.audit_online_retail import audit_workbook
+from src.data.audit_online_retail import audit_workbook
 
 
 def test_synthetic_workbook_covers_rules_and_aggregation(tmp_path: Path) -> None:
