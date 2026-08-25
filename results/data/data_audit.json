@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "audit_scope": "read_only_data_audit_only_no_sampling_no_gt_no_mechanisms_no_mse",
+  "generated_at_utc": "2026-08-25T08:09:40.393005+00:00",
+  "source": {
+    "dataset": "UCI Online Retail",
+    "uci_dataset_id": 352,
+    "dataset_page": "https://archive.ics.uci.edu/dataset/352/online%2Bretail",
+    "download_url": "https://archive.ics.uci.edu/static/public/352/online+retail.zip",
+    "doi": "10.24432/C5BW33",
+    "license": "CC BY 4.0",
+    "downloaded_at_utc": "2026-08-25T08:05:47Z",
+    "original_file_name": "Online Retail.xlsx",
+    "size_bytes": 23715344,
+    "sha256": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d"
+  },
+  "file": {
+    "name": "Online Retail.xlsx",
+    "path": "data/raw/Online Retail.xlsx",
+    "size_bytes": 23715344,
+    "sha256": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d",
+    "unchanged_during_audit": true
+  },
+  "workbook": {
+    "worksheets": [
+      "Online Retail"
+    ],
+    "active_worksheet": "Online Retail"
+  },
+  "schema": {
+    "columns": [
+      "InvoiceNo",
+      "StockCode",
+      "Description",
+      "Quantity",
+      "InvoiceDate",
+      "UnitPrice",
+      "CustomerID",
+      "Country"
+    ],
+    "required_columns": [
+      "InvoiceNo",
+      "StockCode",
+      "Description",
+      "Quantity",
+      "InvoiceDate",
+      "UnitPrice",
+      "CustomerID",
+      "Country"
+    ],
+    "missing_columns": [],
+    "extra_columns": [],
+    "dtypes": {
+      "InvoiceNo": {
+        "pandas_dtype": "object",
+        "python_types": {
+          "int": 532618,
+          "str": 9291
+        }
+      },
+      "StockCode": {
+        "pandas_dtype": "object",
+        "python_types": {
+          "str": 54873,
+          "int": 487036
+        }
+      },
+      "Description": {
+        "pandas_dtype": "object",
+        "python_types": {
+          "str": 540454,
+          "int": 1
+        }
+      },
+      "Quantity": {
+        "pandas_dtype": "int64",
+        "python_types": {
+          "int": 541909
+        }
+      },
+      "InvoiceDate": {
+        "pandas_dtype": "datetime64[us]",
+        "python_types": {
+          "Timestamp": 541909
+        }
+      },
+      "UnitPrice": {
+        "pandas_dtype": "float64",
+        "python_types": {
+          "float": 541909
+        }
+      },
+      "CustomerID": {
+        "pandas_dtype": "float64",
+        "python_types": {
+          "float": 406829
+        }
+      },
+      "Country": {
+        "pandas_dtype": "str",
+        "python_types": {
+          "str": 541909
+        }
+      }
+    }
+  },
+  "raw": {
+    "detail_rows": 541909,
+    "missing_values": {
+      "InvoiceNo": 0,
+      "StockCode": 0,
+      "Description": 1454,
+      "Quantity": 0,
+      "InvoiceDate": 0,
+      "UnitPrice": 0,
+      "CustomerID": 135080,
+      "Country": 0
+    },
+    "fully_duplicated_detail_rows": 5268,
+    "unique_customer_ids_with_valid_integer_form": 4372,
+    "unique_normalized_stock_codes": 3958,
+    "noninteger_or_missing_customer_id_rows": 135080,
+    "noncanonical_stock_code_rows": 1977,
+    "numeric_stock_code_domain": {
+      "unique_count": 2946,
+      "minimum": 10002,
+      "maximum": 90208,
+      "starts_at_1": false,
+      "is_contiguous": false,
+      "missing_integer_count_between_min_and_max": 77261
+    }
+  },
+  "filtering": {
+    "priority": [
+      "invalid_customer_id",
+      "cancelled_invoice",
+      "nonpositive_quantity",
+      "nonpositive_unit_price",
+      "invalid_stock_code"
+    ],
+    "independent_rule_hit_counts": {
+      "invalid_customer_id": 135080,
+      "cancelled_invoice": 9288,
+      "nonpositive_quantity": 10624,
+      "nonpositive_unit_price": 2517,
+      "invalid_stock_code": 2995
+    },
+    "unique_primary_reason_counts": {
+      "invalid_customer_id": 135080,
+      "cancelled_invoice": 8905,
+      "nonpositive_quantity": 0,
+      "nonpositive_unit_price": 40,
+      "invalid_stock_code": 1547,
+      "kept": 396337
+    },
+    "accounting_total": 541909,
+    "all_rows_accounted_for": true
+  },
+  "aggregation_preview": {
+    "definition": "One user per basket after filtering; StockCode is normalized and deduplicated within each user.",
+    "users_before_row_filters": 4372,
+    "users_after_row_filters": 4334,
+    "items_before_row_filters": 3926,
+    "items_after_row_filters": 3659,
+    "empty_baskets_after_filtering": 38,
+    "kept_detail_rows": 396337,
+    "duplicate_user_item_rows_removed_by_basket_deduplication": 130116,
+    "users_with_duplicate_items": 2843,
+    "basket_length": {
+      "min": 1,
+      "p25": 16.0,
+      "median": 35.0,
+      "p75": 77.0,
+      "p90": 142.70000000000027,
+      "p95": 204.0,
+      "p99": 353.6700000000001,
+      "max": 1785,
+      "mean": 61.42616520535302
+    },
+    "all_users_unique": true,
+    "all_baskets_nonempty": true,
+    "all_baskets_deduplicated": true
+  },
+  "mapping_preview": {
+    "rule": "Sort eligible normalized StockCode values lexicographically and assign consecutive IDs 1..d.",
+    "domain_size_d": 3659,
+    "first_10_forward_entries": [
+      {
+        "stock_code": "10002",
+        "internal_id": 1
+      },
+      {
+        "stock_code": "10080",
+        "internal_id": 2
+      },
+      {
+        "stock_code": "10120",
+        "internal_id": 3
+      },
+      {
+        "stock_code": "10123C",
+        "internal_id": 4
+      },
+      {
+        "stock_code": "10124A",
+        "internal_id": 5
+      },
+      {
+        "stock_code": "10124G",
+        "internal_id": 6
+      },
+      {
+        "stock_code": "10125",
+        "internal_id": 7
+      },
+      {
+        "stock_code": "10133",
+        "internal_id": 8
+      },
+      {
+        "stock_code": "10135",
+        "internal_id": 9
+      },
+      {
+        "stock_code": "11001",
+        "internal_id": 10
+      }
+    ],
+    "reverse_mapping_is_defined": true,
+    "mapping_materialized": false
+  },
+  "prohibited_outputs": {
+    "fixed_single_item_dataset": false,
+    "ground_truth": false,
+    "mechanism_outputs": false,
+    "mse": false
+  }
+}
